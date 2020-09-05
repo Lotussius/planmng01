@@ -7,4 +7,5 @@ public class BeanUser {
 	{
 		userid=uid;
 	}
+	public String getId(){ return userid; }
 }
