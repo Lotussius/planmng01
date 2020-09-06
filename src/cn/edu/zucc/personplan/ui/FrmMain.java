@@ -234,12 +234,14 @@ public class FrmMain extends JFrame implements ActionListener {
 		}
 		else if(e.getSource()==this.menuItem_moveUpStep){
 			int i=FrmMain.this.dataTableStep.getSelectedRow();
+			int I=FrmMain.this.dataTablePlan.getSelectedRow();
 			if(i<0) {
 				JOptionPane.showMessageDialog(null, "ÇëÑ¡Ôñ²½Öè", "´íÎó",JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			try {
 				PersonPlanUtil.stepManager.moveUp(this.planSteps.get(i));
+				reloadPlanStepTabel(I);
 			} catch (BaseException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "´íÎó",JOptionPane.ERROR_MESSAGE);
 				return;
@@ -247,12 +249,15 @@ public class FrmMain extends JFrame implements ActionListener {
 		}
 		else if(e.getSource()==this.menuItem_moveDownStep){
 			int i=FrmMain.this.dataTableStep.getSelectedRow();
+			int I=FrmMain.this.dataTablePlan.getSelectedRow();
 			if(i<0) {
 				JOptionPane.showMessageDialog(null, "ÇëÑ¡Ôñ²½Öè", "´íÎó",JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			try {
+
 				PersonPlanUtil.stepManager.moveDown(this.planSteps.get(i));
+				reloadPlanStepTabel(I);
 			} catch (BaseException e1) {
 				JOptionPane.showMessageDialog(null, e1.getMessage(), "´íÎó",JOptionPane.ERROR_MESSAGE);
 				return;

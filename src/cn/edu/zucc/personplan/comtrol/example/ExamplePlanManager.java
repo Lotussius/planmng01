@@ -12,11 +12,11 @@ import cn.edu.zucc.personplan.model.BeanPlan;
 import cn.edu.zucc.personplan.model.BeanUser;
 import cn.edu.zucc.personplan.ui.FrmMain;
 import cn.edu.zucc.personplan.util.BaseException;
-import cn.edu.zucc.personplan.util.DBUtil;
+import cn.edu.zucc.personplan.util.DBPool;
 import cn.edu.zucc.personplan.util.DbException;
 
 public class ExamplePlanManager implements IPlanManager {
-
+	DBPool DBUtil=new DBPool(); //Á¬½Ó³ØDBPoolÌæ»»DBUtil
 	@Override
 	public BeanPlan addPlan(String name) throws BaseException {
 		// TODO Auto-generated method stub

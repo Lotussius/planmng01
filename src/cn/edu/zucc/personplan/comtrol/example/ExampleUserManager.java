@@ -3,7 +3,7 @@ package cn.edu.zucc.personplan.comtrol.example;
 import cn.edu.zucc.personplan.itf.IUserManager;
 import cn.edu.zucc.personplan.model.BeanUser;
 import cn.edu.zucc.personplan.util.BaseException;
-import cn.edu.zucc.personplan.util.DBUtil;
+import cn.edu.zucc.personplan.util.DBPool;
 import cn.edu.zucc.personplan.util.DbException;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class ExampleUserManager  implements IUserManager {
-
+	DBPool DBUtil=new DBPool(); //Á¬½Ó³ØDBPoolÌæ»»DBUtil
 	@Override
 	public BeanUser reg(String userid, String pwd,String pwd2) throws BaseException {
 		// TODO Auto-generated method stub
