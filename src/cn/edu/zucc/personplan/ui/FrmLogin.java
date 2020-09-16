@@ -10,13 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import cn.edu.zucc.personplan.PersonPlanUtil;
 import cn.edu.zucc.personplan.model.BeanUser;
@@ -34,9 +28,13 @@ public class FrmLogin extends JDialog implements ActionListener {
 	private JLabel labelPwd = new JLabel("√‹¬Î£∫");
 	private JTextField edtUserId = new JTextField(20);
 	private JPasswordField edtPwd = new JPasswordField(20);
+	private JRadioButton selectUser=new JRadioButton("user");
+	private JRadioButton selectStaff=new JRadioButton("staff");
 
 	public FrmLogin(Frame f, String s, boolean b) {
 		super(f, s, b);
+
+
 		toolBar.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		toolBar.add(this.btnRegister);
 		toolBar.add(btnLogin);
@@ -46,9 +44,10 @@ public class FrmLogin extends JDialog implements ActionListener {
 		workPane.add(edtUserId);
 		workPane.add(labelPwd);
 		workPane.add(edtPwd);
+		workPane.add(selectUser);
+		workPane.add(selectStaff);
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
-		this.setSize(320, 140);
-		// ∆¡ƒªæ”÷–œ‘ æ
+		this.setSize(320, 140);// ∆¡ƒªæ”÷–œ‘ æ
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		this.setLocation((int) (width - this.getWidth()) / 2,

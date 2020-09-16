@@ -16,9 +16,11 @@ public class BeanPlan {
 		this.start=start;
 		this.finish=finish;
 	}
+
 	public BeanPlan(int pid)
 	{
 		this.pid=pid;
+
 	}
 
 	public int pid,order,step,start,finish;

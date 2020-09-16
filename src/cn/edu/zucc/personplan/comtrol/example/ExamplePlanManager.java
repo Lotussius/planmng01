@@ -126,7 +126,7 @@ public class ExamplePlanManager implements IPlanManager {
 			java.sql.ResultSet rs=pst.executeQuery();
 
 			if(rs.next())
-				throw new BaseException("step existed in this plan, it can't be delete");
+				throw new BaseException("step existed in this plan, it can't be deleted");
 
 			sql="delete from tbl_plan where plan_id=?";
 			pst=conn.prepareStatement(sql);

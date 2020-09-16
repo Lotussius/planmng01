@@ -1,8 +1,6 @@
 package cn.edu.zucc.personplan.ui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Frame;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -11,15 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import cn.edu.zucc.personplan.PersonPlanUtil;
@@ -27,16 +19,21 @@ import cn.edu.zucc.personplan.model.BeanPlan;
 import cn.edu.zucc.personplan.model.BeanStep;
 import cn.edu.zucc.personplan.model.BeanUser;
 import cn.edu.zucc.personplan.util.BaseException;
+import com.mchange.v2.resourcepool.ResourcePool;
 
 
+public class FrmMain extends JFrame implements ActionListener
+{
 
-public class FrmMain extends JFrame implements ActionListener {
+
 	private static final long serialVersionUID = 1L;
-	private JMenuBar menubar=new JMenuBar(); ;
+	private JMenuBar menubar=new JMenuBar();
     private JMenu menu_plan=new JMenu("计划管理");
     private JMenu menu_step=new JMenu("步骤管理");
     private JMenu menu_static=new JMenu("查询统计");
     private JMenu menu_more=new JMenu("更多");
+
+
     
     private JMenuItem  menuItem_AddPlan=new JMenuItem("新建计划");
     private JMenuItem  menuItem_DeletePlan=new JMenuItem("删除计划");
@@ -105,7 +102,21 @@ public class FrmMain extends JFrame implements ActionListener {
 		this.dataTableStep.repaint();
 	}
 	public FrmMain(){
-		
+		try
+		{
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//Nimbus风格，jdk6 update10版本以后的才会出现
+			//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());//当前系统风格
+			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");//Motif风格，是蓝黑
+			//UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());//跨平台的Java风格
+			//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");//windows风格
+			//UIManager.setLookAndFeel("javax.swing.plaf.windows.WindowsLookAndFeel");//windows风格
+			//UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//java风格
+			//UIManager.setLookAndFeel("com.apple.mrj.swing.MacLookAndFeel");//待考察，
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex)
+		{
+			ex.printStackTrace();
+		}
+
 		this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setTitle("个人计划管理系统");
 		dlgLogin=new FrmLogin(this,"登陆",true);
@@ -127,6 +138,7 @@ public class FrmMain extends JFrame implements ActionListener {
 	    menubar.add(menu_static);
 	    menubar.add(menu_more);
 	    this.setJMenuBar(menubar);
+		menubar.setBackground(new Color(255,255,255));menubar.setBorderPainted(false);
 	    
 	    this.getContentPane().add(new JScrollPane(this.dataTablePlan), BorderLayout.WEST);
 	    this.dataTablePlan.addMouseListener(new MouseAdapter (){
@@ -155,9 +167,11 @@ public class FrmMain extends JFrame implements ActionListener {
              }
         });
 	    this.setVisible(true);
+		this.setSize(1024,768);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		if(e.getSource()==this.menuItem_AddPlan){
 			FrmAddPlan dlg=new FrmAddPlan(this,"添加计划",true);
 			dlg.setVisible(true);
@@ -250,6 +264,7 @@ public class FrmMain extends JFrame implements ActionListener {
 		else if(e.getSource()==this.menuItem_moveDownStep){
 			int i=FrmMain.this.dataTableStep.getSelectedRow();
 			int I=FrmMain.this.dataTablePlan.getSelectedRow();
+
 			if(i<0) {
 				JOptionPane.showMessageDialog(null, "请选择步骤", "错误",JOptionPane.ERROR_MESSAGE);
 				return;
@@ -271,4 +286,6 @@ public class FrmMain extends JFrame implements ActionListener {
 			dlg.setVisible(true);
 		}
 	}
+
+
 }

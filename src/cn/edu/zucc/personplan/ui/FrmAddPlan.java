@@ -38,6 +38,7 @@ public class FrmAddPlan extends JDialog implements ActionListener {
 		this.getContentPane().add(workPane, BorderLayout.CENTER);
 		this.setSize(320, 180);
 		// ∆¡ƒªæ”÷–œ‘ æ
+
 		double width = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		double height = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		this.setLocation((int) (width - this.getWidth()) / 2,
